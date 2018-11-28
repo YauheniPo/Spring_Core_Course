@@ -1,9 +1,11 @@
 package popo.epam.spring.core;
 
+import lombok.AllArgsConstructor;
 import popo.epam.spring.core.beans.Client;
 import popo.epam.spring.core.loggers.ConsoleEventLogger;
 import popo.epam.spring.core.loggers.EventLogger;
 
+@AllArgsConstructor
 public class App {
 
     private Client client;
@@ -15,10 +17,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App app = new App();
-
-        app.client = new Client(1, "Yauheni Papovich");
-        app.eventLogger = new ConsoleEventLogger();
+        App app = new App(new Client(1, "Yauheni Papovich"), new ConsoleEventLogger());
 
         app.logEvent("Some event for User 1");
     }
