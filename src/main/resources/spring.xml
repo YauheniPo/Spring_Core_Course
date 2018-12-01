@@ -5,25 +5,6 @@
  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <bean id="client" class="popo.epam.spring.core.beans.Client">
-        <constructor-arg value="1"/> <!--index="0" value="1"--> <!--type="java.lang.Integer" value="1"-->
-        <constructor-arg value="YauheniPo"/> <!--index="1" value="YauheniPo"--> <!--name="fullName" value="YauheniPo"-->
-    </bean>
-
-    <!--DateFormat - abstract class - DateFormat.getDateTimeInstance-->
-    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
-
-    <bean id="event" class="popo.epam.spring.core.beans.Event" scope="prototype">
-        <constructor-arg>
-            <bean class="java.util.Date"/>
-        </constructor-arg>
-        <constructor-arg ref="dateFormat"/>
-    </bean>
-
-    <bean id="eventLogger" class="popo.epam.spring.core.loggers.ConsoleEventLogger"/>
-
-    <bean id="app" class="popo.epam.spring.core.App" scope="singleton">
-        <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
-    </bean>
+    <import resource="loggers.xml"/>
+    <import resource="others.xml"/>
 </beans>
