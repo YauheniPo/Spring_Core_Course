@@ -1,6 +1,9 @@
 package popo.epam.spring.core;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import popo.epam.spring.core.beans.Client;
@@ -10,8 +13,9 @@ import popo.epam.spring.core.loggers.EventType;
 
 import java.util.Map;
 
+@Log4j2
 @AllArgsConstructor
-public class App {
+public class App implements ApplicationListener {
 
     private Client client;
     private EventLogger defaultLogger;
@@ -28,8 +32,11 @@ public class App {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
-        App app = (App) ctx.getBean("app");
-        Event event = (Event) ctx.getBean("event");
+        App app = ctx.getBean("app", App.class);
+        Event event = ctx.getBean("event", Event.class);
+
+        event.setMsg(app.client.getProperties().getProperty("status"));
+        app.logEvent(EventType.INFO, event);
         event.setMsg("Some event for User 1");
         app.logEvent(EventType.ERROR, event);
         event.setMsg("Some event for User 2");
@@ -38,5 +45,10 @@ public class App {
         app.logEvent(null, event);
 
         ctx.close();
+    }
+
+    @Override
+    public void onApplicationEvent(ApplicationEvent applicationEvent) {
+        log.info(applicationEvent.toString());
     }
 }
