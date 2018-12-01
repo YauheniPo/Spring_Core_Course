@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import popo.epam.spring.core.beans.Client;
+import popo.epam.spring.core.beans.Event;
 import popo.epam.spring.core.loggers.EventLogger;
 
 @NoArgsConstructor
@@ -14,16 +15,16 @@ public class App {
     private Client client;
     private EventLogger eventLogger;
 
-    private void logEvent(String msg) {
-        String message = msg.replaceAll(this.client.getId().toString(), this.client.getFullName());
-        eventLogger.logEvent(message);
+    private void logEvent(Event event) {
+        eventLogger.logEvent(event);
     }
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
         App app = (App) ctx.getBean("app");
-
-        app.logEvent("Some event for User 1");
+        Event event = (Event) ctx.getBean("event");
+        event.setMsg("Some event for User 1");
+        app.logEvent(event);
     }
 }
