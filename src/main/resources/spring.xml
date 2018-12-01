@@ -5,10 +5,15 @@
  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <bean id="client" class="popo.epam.spring.core.beans.Client"/>
+    <bean id="client" class="popo.epam.spring.core.beans.Client">
+        <constructor-arg value="1"/> <!--index="0" value="1"--> <!--type="java.lang.Integer" value="1"-->
+        <constructor-arg value="YauheniPo"/> <!--index="1" value="YauheniPo"--> <!--name="fullName" value="YauheniPo"-->
+    </bean>
 
     <bean id="eventLogger" class="popo.epam.spring.core.loggers.ConsoleEventLogger"/>
 
-    <bean id="app" class="popo.epam.spring.core.App"/>
-
+    <bean id="app" class="popo.epam.spring.core.App">
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="eventLogger"/>
+    </bean>
 </beans>

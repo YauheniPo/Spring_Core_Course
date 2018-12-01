@@ -1,10 +1,13 @@
 package popo.epam.spring.core;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import popo.epam.spring.core.beans.Client;
-import popo.epam.spring.core.loggers.ConsoleEventLogger;
 import popo.epam.spring.core.loggers.EventLogger;
 
+@NoArgsConstructor
 @AllArgsConstructor
 public class App {
 
@@ -17,7 +20,9 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App app = new App(new Client(1, "Yauheni Papovich"), new ConsoleEventLogger());
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+
+        App app = (App) ctx.getBean("app");
 
         app.logEvent("Some event for User 1");
     }
