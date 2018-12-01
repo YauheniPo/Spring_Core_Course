@@ -14,7 +14,7 @@ import java.nio.charset.Charset;
 
 @Log4j2
 @RequiredArgsConstructor
-public abstract class FileEventLogger implements EventLogger {
+public class FileEventLogger implements EventLogger {
 
     @NonNull private String filename;
     private File file;

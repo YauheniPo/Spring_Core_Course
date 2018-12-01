@@ -1,14 +1,14 @@
 package popo.epam.spring.core.beans;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Client {
 
     @Getter @Setter
-    private Integer id;
+    @NonNull private Integer id;
     @Getter @Setter
-    private String fullName;
+    @NonNull private String fullName;
+    @Setter
+    private String greeting;
 }
