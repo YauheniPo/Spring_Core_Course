@@ -8,21 +8,18 @@
  		http://www.springframework.org/schema/util
  		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:client.properties</value>
-            </list>
-        </property>
-        <property name="ignoreResourceNotFound" value="true"/>
-        <property name="systemPropertiesMode">
-            <util:constant
-                    static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
-        </property>
+    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+
+    <bean id="date" class="java.util.Date"/>
+
+    <!--Expression Language - "#{...}"-->
+    <bean id="timezone" class="java.lang.String" factory-method="valueOf">
+        <constructor-arg value="#{T(java.time.ZonedDateTime).now(T(java.time.ZoneId).systemDefault()).getZone()}"/>
     </bean>
 
-    <!--DateFormat - abstract class - DateFormat.getDateTimeInstance-->
-    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+    <bean id="user" class="java.lang.String" factory-method="valueOf">
+        <constructor-arg value="#{systemEnvironment['USERNAME']}"/>
+    </bean>
 
     <util:map id="loggerMap">
         <entry key="INFO" value-ref="consoleEventLogger"/>

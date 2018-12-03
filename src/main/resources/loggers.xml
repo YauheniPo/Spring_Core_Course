@@ -7,13 +7,12 @@
 
     <bean id="consoleEventLogger" class="popo.epam.spring.core.loggers.ConsoleEventLogger"/>
 
-    <bean id="fileEventLogger" class="popo.epam.spring.core.loggers.FileEventLogger"
-          init-method="init"> <!--abstract="true"-->
+    <bean id="fileEventLogger" class="popo.epam.spring.core.loggers.FileEventLogger">
         <constructor-arg value="log/logfile.log"/>
     </bean>
 
     <bean id="cacheFileEventLogger" class="popo.epam.spring.core.loggers.CacheFileEventLogger"
-          init-method="init" destroy-method="destroy" parent="fileEventLogger">
+          parent="fileEventLogger">
         <constructor-arg value="5"/>
     </bean>
 
