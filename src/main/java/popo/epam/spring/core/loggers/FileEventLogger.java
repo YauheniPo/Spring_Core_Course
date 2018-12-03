@@ -1,12 +1,11 @@
 package popo.epam.spring.core.loggers;
 
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import popo.epam.spring.core.beans.Event;
-import popo.epam.spring.core.exeptions.FileNotWritable;
+import popo.epam.spring.core.exceptions.FileNotWritable;
 
 import java.io.File;
 import java.io.IOException;
