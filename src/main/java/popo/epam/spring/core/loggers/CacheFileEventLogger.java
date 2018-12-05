@@ -2,6 +2,7 @@ package popo.epam.spring.core.loggers;
 
 import popo.epam.spring.core.beans.Event;
 
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class CacheFileEventLogger extends FileEventLogger {
         }
     }
 
+    @PreDestroy
     private void destroy() {
         if (!cache.isEmpty()) {
             writeEventsFromCache();

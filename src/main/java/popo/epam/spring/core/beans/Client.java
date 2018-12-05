@@ -1,18 +1,24 @@
 package popo.epam.spring.core.beans;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import java.util.Properties;
+import javax.annotation.Resource;
 
-@RequiredArgsConstructor
+@ToString
+@Getter @Setter
+@Component
 public class Client {
 
-    @Getter @Setter
-    @NonNull private Integer id;
-    @Getter @Setter
-    @NonNull private String fullName;
-    @Setter
+    @Value("${client.id}")
+    private Integer id;
+    @Value("${client.name}")
+    private String fullName;
+    @Value("${client.greeting}")
     private String greeting;
-    @Getter @Setter
-    private Properties properties;
+    @Resource(name = "user")
+    private String user;
 }

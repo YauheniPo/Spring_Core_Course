@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import popo.epam.spring.core.beans.Event;
 import popo.epam.spring.core.exceptions.FileNotWritable;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -18,6 +19,7 @@ public class FileEventLogger implements EventLogger {
     @NonNull private String filename;
     private File file;
 
+    @PostConstruct
     private void init() throws FileNotWritable, IOException {
         this.file = new File(filename);
         if (!file.exists()) {
