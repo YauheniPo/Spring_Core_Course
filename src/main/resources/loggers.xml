@@ -24,4 +24,6 @@
             </list>
         </constructor-arg>
     </bean>
+
+    <bean id="logaspect" class="popo.epam.spring.core.aspects.LoggingAspect"/> <!--@Component-->
 </beans>

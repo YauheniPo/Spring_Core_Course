@@ -28,7 +28,7 @@ public class App implements ApplicationListener {
     @Resource(name = "loggerMap")
     private Map<EventType, EventLogger> loggers;
 
-    private void logEvent(EventType type, Event event) {
+    private void loggingEvent(EventType type, Event event) {
         EventLogger logger = loggers.get(type);
         if (logger == null) {
             logger = defaultLogger;
@@ -45,11 +45,11 @@ public class App implements ApplicationListener {
         log.info(app.client.toString());
 
         event.setMsg("Some event for User 1");
-        app.logEvent(EventType.ERROR, event);
+        app.loggingEvent(EventType.ERROR, event);
         event.setMsg("Some event for User 2");
-        app.logEvent(EventType.INFO, event);
+        app.loggingEvent(EventType.INFO, event);
         event.setMsg("Some event for User 3");
-        app.logEvent(null, event);
+        app.loggingEvent(null, event);
 
         ctx.close();
     }
