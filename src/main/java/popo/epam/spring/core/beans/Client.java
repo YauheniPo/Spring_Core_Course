@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 @ToString
 @Getter @Setter
 @Component
+@PropertySource(ignoreResourceNotFound = true, value = "classpath:client.properties")
 public class Client {
 
     @Value("${client.id}")
