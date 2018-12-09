@@ -1,7 +1,6 @@
 package popo.epam.spring.core;
 
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -24,8 +23,6 @@ import java.util.Map;
 @Scope(value = "singleton")
 public class App implements ApplicationListener {
 
-    @Autowired(required = false)
-    private Client client;
     @Resource(name = "cacheFileEventLogger")
     private EventLogger defaultLogger;
     @Resource(name = "loggerMap")
@@ -43,19 +40,19 @@ public class App implements ApplicationListener {
 //        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         ApplicationContext actx = new AnnotationConfigApplicationContext(AppConfig.class);
 
+        App app = actx.getBean(App.class);
+        Client client = actx.getBean("getClient", Client.class);
+        Event event = actx.getBean("getEvent", Event.class);
 
-//        App app = ctx.getBean("app", App.class);
-//        Event event = actx.getBean("event", Event.class);
-//
-//        log.info(app.client.toString());
-//
-//        event.setMsg("Some event for User 1");
-//        app.loggingEvent(EventType.ERROR, event);
-//        event.setMsg("Some event for User 2");
-//        app.loggingEvent(EventType.INFO, event);
-//        event.setMsg("Some event for User 3");
-//        app.loggingEvent(null, event);
-//
+        log.info(client.toString());
+
+        event.setMsg("Some event for User 1");
+        app.loggingEvent(EventType.ERROR, event);
+        event.setMsg("Some event for User 2");
+        app.loggingEvent(EventType.INFO, event);
+        event.setMsg("Some event for User 3");
+        app.loggingEvent(null, event);
+
 //        ctx.close();
     }
 
