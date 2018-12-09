@@ -57,6 +57,9 @@ public class App implements ApplicationListener {
         app.loggingEvent(EventType.ERROR, event);
         event.setMsg("Some event for User 2");
         app.loggingEvent(EventType.INFO, event);
+        app.loggingEvent(EventType.INFO, event);
+        app.loggingEvent(EventType.INFO, event);
+        app.loggingEvent(EventType.INFO, event);
         event.setMsg("Some event for User 3");
         app.loggingEvent(null, event);
 

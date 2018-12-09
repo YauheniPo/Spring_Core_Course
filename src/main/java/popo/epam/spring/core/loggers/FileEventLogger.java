@@ -32,6 +32,13 @@ public class FileEventLogger implements EventLogger {
 
     @Override
     public void logEvent(Event event) {
+        if (file == null) {
+            try {
+                init();
+            } catch (FileNotWritable | IOException fileNotWritable) {
+                fileNotWritable.printStackTrace();
+            }
+        }
         try {
             FileUtils.writeStringToFile(file, event.toString() + "\n", Charset.defaultCharset(), true);
         } catch (IOException e) {
