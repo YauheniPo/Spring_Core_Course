@@ -1,14 +1,14 @@
 package popo.epam.spring.core;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+import popo.epam.spring.core.aspects.LoggingStatisticsAspect;
 import popo.epam.spring.core.beans.Client;
 import popo.epam.spring.core.beans.Event;
 import popo.epam.spring.core.config.AppConfig;
@@ -23,13 +23,21 @@ import java.util.Map;
 @Scope(value = "singleton")
 public class App implements ApplicationListener {
 
+    @Autowired
+    private LoggingStatisticsAspect loggingStatisticsAspect;
     @Resource(name = "cacheFileEventLogger")
     private EventLogger defaultLogger;
     @Resource(name = "loggerMap")
     private Map<EventType, EventLogger> loggers;
 
+    public App() {
+    }
+
     private void loggingEvent(EventType type, Event event) {
-        EventLogger logger = loggers.get(type);
+        EventLogger logger = null;
+        if (type != null) {
+            logger = loggers.get(type.name());
+        }
         if (logger == null) {
             logger = defaultLogger;
         }
@@ -37,7 +45,6 @@ public class App implements ApplicationListener {
     }
 
     public static void main(String[] args) {
-//        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         ApplicationContext actx = new AnnotationConfigApplicationContext(AppConfig.class);
 
         App app = actx.getBean(App.class);
@@ -53,7 +60,7 @@ public class App implements ApplicationListener {
         event.setMsg("Some event for User 3");
         app.loggingEvent(null, event);
 
-//        ctx.close();
+        log.info(app.loggingStatisticsAspect.toString());
     }
 
     @Override

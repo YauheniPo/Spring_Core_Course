@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Log4j2
 @Aspect
-@Component
+@Component //or <bean id="logaspect" class="...LoggingAspect"/>
 public class LoggingAspect {
 
     @Pointcut(value = "execution(* *.logEvent(..))")
@@ -15,7 +15,7 @@ public class LoggingAspect {
     }
 
     @Before(value = "allLogEventMethods()")
-    public void logBefore(JoinPoint joinPoint) {
+    private void logBefore(JoinPoint joinPoint) {
         log.info("BEFORE : " +
                 joinPoint.getTarget().getClass().getSimpleName() +
                 " " + joinPoint.getSignature().getName());
@@ -24,14 +24,14 @@ public class LoggingAspect {
     @AfterReturning(
             pointcut = "allLogEventMethods()",
             returning = "retVal")
-    public void logAfter(Object retVal) {
+    private void logAfter(Object retVal) {
         log.info("Returned value: " + retVal);
     }
 
     @AfterThrowing(
             pointcut = "allLogEventMethods()",
             throwing = "ex")
-    public void logAfterThrow(Throwable ex) {
+    private void logAfterThrow(Throwable ex) {
         log.warn("Thrown: " + ex);
     }
 }
