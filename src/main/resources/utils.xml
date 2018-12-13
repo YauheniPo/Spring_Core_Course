@@ -8,18 +8,18 @@
  		http://www.springframework.org/schema/util
  		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+    <!--<bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>-->
 
-    <bean id="date" class="java.util.Date"/>
+    <!--<bean id="date" class="java.util.Date"/>-->
 
     <!--Expression Language - "#{...}"-->
-    <bean id="timezone" class="java.lang.String" factory-method="valueOf">
-        <constructor-arg value="#{T(java.time.ZonedDateTime).now(T(java.time.ZoneId).systemDefault()).getZone()}"/>
-    </bean>
+    <!--<bean id="timezone" class="java.lang.String" factory-method="valueOf">-->
+        <!--<constructor-arg value="#{T(java.time.ZonedDateTime).now(T(java.time.ZoneId).systemDefault()).getZone()}"/>-->
+    <!--</bean>-->
 
-    <bean id="user" class="java.lang.String" factory-method="valueOf">
-        <constructor-arg value="#{systemEnvironment['USERNAME']}"/>
-    </bean>
+    <!--<bean id="user" class="java.lang.String" factory-method="valueOf">-->
+        <!--<constructor-arg value="#{systemEnvironment['USERNAME']}"/>-->
+    <!--</bean>-->
 
     <util:map id="loggerMap">
         <entry key="INFO" value-ref="consoleEventLogger"/>

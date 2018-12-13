@@ -20,10 +20,10 @@ public class Event {
     @Setter @Getter
     private String msg;
     @Autowired(required = false)
-    @Qualifier(value = "date")
+//    @Qualifier(value = "date")
     private Date date;
     @Autowired(required = false)
-    @Qualifier(value = "dateFormat")
+//    @Qualifier(value = "dateFormat")
     private DateFormat df;
     @Resource(name = "timezone")
     private String timezone;

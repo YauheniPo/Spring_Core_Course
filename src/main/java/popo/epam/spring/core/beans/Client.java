@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-
 @ToString
 @Getter @Setter
 @Component
@@ -21,6 +19,6 @@ public class Client {
     private String fullName;
     @Value("${client.greeting}")
     private String greeting;
-    @Resource(name = "user")
+    @Value("#{systemEnvironment['USERNAME']}")
     private String user;
 }
