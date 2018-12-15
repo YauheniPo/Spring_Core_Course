@@ -30,14 +30,10 @@ public class App implements ApplicationListener {
     @Resource(name = "loggerMap")
     private Map<EventType, EventLogger> loggers;
 
-    public App() {
-    }
 
     private void loggingEvent(EventType type, Event event) {
-        EventLogger logger = null;
-        if (type != null) {
-            logger = loggers.get(type.name());
-        }
+        EventLogger logger = loggers.get(type);
+
         if (logger == null) {
             logger = defaultLogger;
         }

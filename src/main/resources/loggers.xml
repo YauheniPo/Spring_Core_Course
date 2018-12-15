@@ -5,25 +5,25 @@
  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <bean id="consoleEventLogger" class="popo.epam.spring.core.loggers.ConsoleEventLogger"/>
+    <!--<bean id="consoleEventLogger" class="popo.epam.spring.core.loggers.ConsoleEventLogger"/>-->
 
-    <bean id="fileEventLogger" class="popo.epam.spring.core.loggers.FileEventLogger">
-        <constructor-arg value="log/logfile.log"/>
-    </bean>
+    <!--<bean id="fileEventLogger" class="popo.epam.spring.core.loggers.FileEventLogger">-->
+        <!--<constructor-arg value="log/logfile.log"/>-->
+    <!--</bean>-->
 
-    <bean id="cacheFileEventLogger" class="popo.epam.spring.core.loggers.CacheFileEventLogger"
-          parent="fileEventLogger">
-        <constructor-arg value="5"/>
-    </bean>
+    <!--<bean id="cacheFileEventLogger" class="popo.epam.spring.core.loggers.CacheFileEventLogger"-->
+          <!--parent="fileEventLogger">-->
+        <!--<constructor-arg value="5"/>-->
+    <!--</bean>-->
 
-    <bean id="combinedEventLogger" class="popo.epam.spring.core.loggers.CombinedEventLogger">
-        <constructor-arg>
-            <list>
-                <ref bean="consoleEventLogger"/>
-                <ref bean="fileEventLogger"/>
-            </list>
-        </constructor-arg>
-    </bean>
+    <!--<bean id="combinedEventLogger" class="popo.epam.spring.core.loggers.CombinedEventLogger">-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<ref bean="consoleEventLogger"/>-->
+                <!--<ref bean="fileEventLogger"/>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
 
-    <bean id="logaspect" class="popo.epam.spring.core.aspects.LoggingAspect"/> <!--@Component-->
+    <!--<bean id="logaspect" class="popo.epam.spring.core.aspects.LoggingAspect"/> &lt;!&ndash;@Component&ndash;&gt;-->
 </beans>
